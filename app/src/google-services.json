@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "755893569399",
+    "project_id": "led-controller-93c87",
+    "storage_bucket": "led-controller-93c87.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755893569399:android:f398d52c37485b6a004372",
+        "android_client_info": {
+          "package_name": "com.example.ledcontrollmkii"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9m90eFNzIMq3_iapaF5thOom-CxPe1pw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:755893569399:android:7d80c4ee6b06c1f4004372",
+        "android_client_info": {
+          "package_name": "john.ledcontroller"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9m90eFNzIMq3_iapaF5thOom-CxPe1pw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

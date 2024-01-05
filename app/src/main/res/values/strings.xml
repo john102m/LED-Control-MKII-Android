@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Led Controller MKII</string>
+    <string name="information">Information</string>
+    <string name="button_one">B1</string>
+    <string name="button_two">B2</string>
+    <string name="button_three">B3</string>
+    <string name="button_four">B4</string>
+    <string name="button_five">B5</string>
+    <string name="button_six">B6</string>
+    <string name="button_seven">B7</string>
+    <string name="button_eight">B8</string>
+    <string name="button_nine">RANDOM</string>
+    <string name="button_ten">MODE+</string>
+    <string name="button_eleven">MODE-</string>
+    <string name="button_twelve">SHUFFLE</string>
+    <string name="button_fourteen">AUDIO</string>
+    <string name="default_notification_channel_id">com.example.ledcontrollmkii.urgent</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <solid android:color="#FF0000" /> <!-- Fill color of the shape -->
+        <corners android:radius="8dp" /> <!-- Corner radius of the shape -->
+        <size android:width="24dp" android:height="24dp" /> <!-- Size of the shape -->
+    </shape>
+
+</selector>
