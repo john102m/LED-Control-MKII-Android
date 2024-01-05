@@ -1,9 +1,14 @@
 package com.example.ledcontrollmkii;
 
+import static java.security.AccessController.getContext;
+
+//import android.annotation.NonNull;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +18,9 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -116,29 +124,31 @@ public class MainActivity extends AppCompatActivity {
     public static void showNotification(@NotNull Context context, String msg) {
         Log.i(TAG, "showNotification:" + context.toString());
 
+        Intent notificationIntent = new Intent(context, MainActivity.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP & Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        final PendingIntent pendingIntent;
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_MUTABLE);}
+        else{
+            pendingIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);}
+
         String channelId = "com.example.ledcontrollmkii.urgent";
-        CharSequence channelName = "My_Channel";
-        int importance = NotificationManager.IMPORTANCE_HIGH;
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder notification = new NotificationCompat.Builder(context, channelId)
+                .setAutoCancel(true)
+                .setLights(ContextCompat.getColor(context, R.color.purple), 200, 200)
+                .setContentTitle("LED Controller")
+                .setContentText(msg)
+                .setColor(ContextCompat.getColor(context, R.color.purple))
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentIntent(pendingIntent)
+                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND);
 
-        // Create a notification channel for Android 8.0 and above
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
-            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
+        Notification builtNotification = notification.build();
+        builtNotification.flags |= Notification.FLAG_SHOW_LIGHTS;
 
-        // Create the notification using Notification.Builder
-        Notification.Builder builder = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            builder = new Notification.Builder(context, channelId)
-                    .setContentTitle("LED Controller")
-                    .setContentText(msg)
-                    .setSmallIcon(R.drawable.custome_shape_1);
-        }
-
-        // Show the notification
-        NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-        notificationManager.notify(1001, builder.build());
+        NotificationManagerCompat manager = NotificationManagerCompat.from(context);
+        notificationManager.notify(1, builtNotification);
     }
     private void createWebSocketClient() {
         URI uri;
