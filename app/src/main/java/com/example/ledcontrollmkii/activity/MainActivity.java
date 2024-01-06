@@ -1,16 +1,17 @@
-package com.example.ledcontrollmkii;
-
-import static java.security.AccessController.getContext;
+package com.example.ledcontrollmkii.activity;
 
 //import android.annotation.NonNull;
 import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
+        import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,16 +22,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.ledcontrollmkii.R;
+import com.example.ledcontrollmkii.dbhelper.ScheduleDbHelper;
+import com.example.ledcontrollmkii.services.DatabaseService;
+import com.example.ledcontrollmkii.services.MyFirebaseMessagingService;
 import com.google.android.material.snackbar.Snackbar;
+
 
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 import tech.gusavila92.websocketclient.WebSocketClient;
 
@@ -39,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     WebSocketClient webSocketClient = null;
     private boolean websocketConnected = false;
+
+
 
     Context context;
     TextView textView;
@@ -50,9 +57,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textView = (TextView)findViewById(R.id.placeholder);
-
-        String token = MyFirebaseMessagingService.getToken(this);
-        Log.e("newToken", token);
+        //String token = MyFirebaseMessagingService.getToken(this);
+        //Log.e("newToken", token);
 
         textView.setText("Hey Dudes");
 
@@ -63,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 //            return insets;
 //        });
+
     }
 
     public void onClick(View view) {
@@ -97,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
             case "AUDIO":
                 msg = "B9";
                 //DO_AUDIO = true;
+                Intent scheduleIntent = new Intent(this, ScheduleActivity.class);
+                scheduleIntent.putExtra("key", 3000); //Optional parameters
+                this.startActivity(scheduleIntent);
                 break;
             case "SHUFFLE":
                 msg = "B11";

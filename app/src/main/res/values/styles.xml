@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="HeadingTextStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+
+        <!-- Add any other common attributes you want to share -->
+    </style>
+
+
+</resources>

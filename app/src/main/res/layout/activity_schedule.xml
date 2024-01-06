@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="36dp">
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textAlignment="center"
+        android:textStyle="bold|italic"
+        android:text="Schedule"
+        android:layout_margin="12dp"/>
+
+    <LinearLayout
+        android:id="@+id/headerlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+        <TextView
+            android:id="@+id/heading1"
+            android:layout_width="0dp"
+            android:layout_weight="0.6"
+            android:layout_height="wrap_content"
+            android:text="mode"
+            style="@style/HeadingTextStyle"
+            android:layout_marginLeft="8dp"/>
+        <TextView
+            android:id="@+id/heading2"
+            android:layout_width="0dp"
+            android:layout_weight="0.42"
+            android:layout_height="wrap_content"
+            style="@style/HeadingTextStyle"
+            android:text="time"
+            android:layout_marginRight="8dp"/>
+        <TextView
+            android:id="@+id/heading3"
+            android:layout_width="0dp"
+            android:layout_weight="0.125"
+            android:layout_height="wrap_content"
+            style="@style/HeadingTextStyle"
+            android:text="set"
+            android:layout_marginRight="8dp"/>
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#000000"
+        android:layout_marginBottom="8dp"
+        />
+    <!-- Nested Layout 1 -->
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+
+        <!-- Spinner 1 -->
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/sp_weight"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"/>
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/tv_weight"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:gravity="center_vertical"
+            android:layout_marginRight="8dp"/>
+
+        <!-- Button 1 -->
+        <Button
+            android:id="@+id/button1"
+            android:drawableStart="@mipmap/ic_clock"
+            android:drawablePadding="6dp"
+            android:onClick="onClick"
+            android:layout_width="0dp"
+            android:layout_weight="0.30"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- Repeat the above nested layout for Spinner 2 and Button 2 -->
+    <!-- Nested Layout 2 -->
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <!-- Spinner 2 -->
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/sp_weight"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"/>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/tv_weight"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:gravity="center_vertical"
+            android:layout_marginRight="8dp"/>
+        <!-- Button 2 -->
+        <Button
+            android:id="@+id/button2"
+            android:drawableStart="@mipmap/ic_clock"
+            android:onClick="onClick"
+            android:layout_width="0dp"
+            android:layout_weight="0.30"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <!-- Nested Layout 3 -->
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <!-- Spinner 3 -->
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/sp_weight"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"/>
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/tv_weight"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:gravity="center_vertical"
+            android:layout_marginRight="8dp"/>
+        <!-- Button 2 -->
+        <Button
+            android:id="@+id/button3"
+            android:drawableStart="@mipmap/ic_clock"
+            android:onClick="onClick"
+            android:layout_width="0dp"
+            android:layout_weight="0.30"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- Nested Layout 4 -->
+    <LinearLayout
+        android:id="@+id/layout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <!-- Spinner 4-->
+        <Spinner
+            android:id="@+id/spinner4"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/sp_weight"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"/>
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/tv_weight"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:gravity="center_vertical"
+            android:layout_marginRight="8dp"/>
+
+        <!-- Button 2 -->
+        <Button
+            android:id="@+id/button4"
+            android:drawableStart="@mipmap/ic_clock"
+            android:onClick="onClick"
+            android:layout_width="0dp"
+            android:layout_weight="0.30"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <!-- Nested Layout 5 -->
+    <LinearLayout
+        android:id="@+id/layout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <!-- Spinner 3 -->
+        <Spinner
+            android:id="@+id/spinner5"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/sp_weight"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"/>
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/tv_weight"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:gravity="center_vertical"
+            android:layout_marginRight="8dp"/>
+        <!-- Button 2 -->
+        <Button
+            android:id="@+id/button5"
+            android:drawableStart="@mipmap/ic_clock"
+            android:onClick="onClick"
+            android:layout_width="0dp"
+            android:layout_weight="0.30"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,14 +1,13 @@
-package com.example.ledcontrollmkii;
-import android.app.Application;
+package com.example.ledcontrollmkii.services;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+
+import com.example.ledcontrollmkii.activity.MainActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import android.app.Activity;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 import org.json.JSONObject;
 
