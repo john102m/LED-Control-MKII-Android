@@ -18,7 +18,7 @@ public class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener
 {
     MyInterface _myInterface;
-    int _row;
+
 //    TimePickerDialog.OnTimeSetListener mCallback;
 //    public void setInterface(MyInterface myInterface) {
 //        this._myInterface = myInterface;
@@ -26,15 +26,16 @@ public class TimePickerFragment extends DialogFragment
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current time as the default values for the picker.
-
-
         final Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
+//        c.set(Calendar.HOUR_OF_DAY, selectedHour);
+//        c.set(Calendar.MINUTE, selectedMinute);
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            _row = bundle.getInt("row", 0);
+            hour = bundle.getInt("currentHour", 0);
+            minute = bundle.getInt("currentMinute", 0);
         }
 
         // Create a new instance of TimePickerDialog and return it.
@@ -45,7 +46,7 @@ public class TimePickerFragment extends DialogFragment
         // Do something with the time the user picks.
 //        String selectedTime = hourOfDay + ":" + minute;
 //        Log.i("Frag", "onTimeSet: " + selectedTime);
-        _myInterface.onTimeSet(_row, hourOfDay,minute);
+        _myInterface.onTimeSet(hourOfDay, minute);
     }
     @Override
     public void onAttach(Context context) {

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/rootLayout"
     android:padding="36dp">
 
     <TextView
@@ -33,7 +34,7 @@
         <TextView
             android:id="@+id/heading2"
             android:layout_width="0dp"
-            android:layout_weight="0.42"
+            android:layout_weight="0.39"
             android:layout_height="wrap_content"
             style="@style/HeadingTextStyle"
             android:text="time"
@@ -67,12 +68,14 @@
         <!-- Spinner 1 -->
         <Spinner
             android:id="@+id/spinner1"
+            android:tag="spinner1"
             android:layout_width="0dp"
             android:layout_weight="@dimen/sp_weight"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"/>
         <TextView
             android:id="@+id/textView1"
+            android:tag="textView1"
             android:layout_width="0dp"
             android:layout_weight="@dimen/tv_weight"
             android:layout_height="wrap_content"
@@ -103,12 +106,14 @@
         <!-- Spinner 2 -->
         <Spinner
             android:id="@+id/spinner2"
+            android:tag="spinner2"
             android:layout_width="0dp"
             android:layout_weight="@dimen/sp_weight"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"/>
         <TextView
             android:id="@+id/textView2"
+            android:tag="textView2"
             android:layout_width="0dp"
             android:layout_weight="@dimen/tv_weight"
             android:layout_height="wrap_content"
@@ -135,12 +140,14 @@
         <!-- Spinner 3 -->
         <Spinner
             android:id="@+id/spinner3"
+            android:tag="spinner3"
             android:layout_width="0dp"
             android:layout_weight="@dimen/sp_weight"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"/>
         <TextView
             android:id="@+id/textView3"
+            android:tag="textView3"
             android:layout_width="0dp"
             android:layout_weight="@dimen/tv_weight"
             android:layout_height="wrap_content"
@@ -168,12 +175,14 @@
         <!-- Spinner 4-->
         <Spinner
             android:id="@+id/spinner4"
+            android:tag="spinner4"
             android:layout_width="0dp"
             android:layout_weight="@dimen/sp_weight"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"/>
         <TextView
             android:id="@+id/textView4"
+            android:tag="textView4"
             android:layout_width="0dp"
             android:layout_weight="@dimen/tv_weight"
             android:layout_height="wrap_content"
@@ -198,21 +207,24 @@
         android:orientation="horizontal"
         android:layout_marginBottom="8dp">
 
-        <!-- Spinner 3 -->
+        <!-- Spinner 4-->
         <Spinner
             android:id="@+id/spinner5"
+            android:tag="spinner5"
             android:layout_width="0dp"
             android:layout_weight="@dimen/sp_weight"
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"/>
         <TextView
             android:id="@+id/textView5"
+            android:tag="textView5"
             android:layout_width="0dp"
             android:layout_weight="@dimen/tv_weight"
             android:layout_height="wrap_content"
             android:text="00:00"
             android:gravity="center_vertical"
             android:layout_marginRight="8dp"/>
+
         <!-- Button 2 -->
         <Button
             android:id="@+id/button5"
@@ -222,4 +234,58 @@
             android:layout_weight="0.30"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+    <!-- Nested Layout 6 -->
+    <LinearLayout
+        android:id="@+id/layout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <!-- Spinner 4-->
+        <Spinner
+            android:id="@+id/spinner6"
+            android:tag="spinner6"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/sp_weight"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"/>
+        <TextView
+            android:id="@+id/textView6"
+            android:tag="textView6"
+            android:layout_width="0dp"
+            android:layout_weight="@dimen/tv_weight"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:gravity="center_vertical"
+            android:layout_marginRight="8dp"/>
+
+        <!-- Button 2 -->
+        <Button
+            android:id="@+id/button6"
+            android:drawableStart="@mipmap/ic_clock"
+            android:onClick="onClick"
+            android:layout_width="0dp"
+            android:layout_weight="0.30"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutEnd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="1dp">
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+    </LinearLayout>
+
 </LinearLayout>

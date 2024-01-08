@@ -1,5 +1,6 @@
 package com.example.ledcontrollmkii.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,22 +9,26 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ledcontrollmkii.MyInterface;
 import com.example.ledcontrollmkii.R;
+import com.example.ledcontrollmkii.ScheduleEntry;
 import com.example.ledcontrollmkii.dbhelper.ScheduleDbHelper;
 import com.example.ledcontrollmkii.services.DatabaseService;
 
+import java.util.ArrayList;
+
 public class ScheduleActivity extends AppCompatActivity implements MyInterface {
     private static final String TAG = "ScheduleActivity";
-    Button button;
-
-    ScheduleDbHelper _scheduleDbHelper = new ScheduleDbHelper(this);
-
-    DatabaseService _dbService;
+    private ScheduleDbHelper _scheduleDbHelper = new ScheduleDbHelper(this);
+    private DatabaseService _dbService;
+    private int _selectedTextViewId = 0;
+    private int _selectedSpinnerId = 0;
+    private int _selectedRowId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +46,56 @@ public class ScheduleActivity extends AppCompatActivity implements MyInterface {
 
         setSpinners();
 
+        Button saveButton = findViewById(R.id.saveButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                ArrayList<ScheduleEntry> schedules = _dbService.getSixEntries();
+                LinearLayout rootLayout = findViewById(R.id.rootLayout);
+
+                // go through each currently saved schedule and update accordingly
+                // this will not work if there were no schedules already saved or
+                // if there's less than 5
+                schedules.forEach((s) -> {
+                    Spinner spinner = rootLayout.findViewWithTag("spinner" + s.getScheduleRow());
+                    String modeText = (String) spinner.getSelectedItem();
+
+                    TextView textView = rootLayout.findViewWithTag("textView" + s.getScheduleRow());
+                    String selectedTime = (String) textView.getText();
+
+                    _dbService.updateOrInsert(s.getScheduleRow(), modeText, selectedTime);
+                });
+
+
+                //Toast.makeText(ScheduleActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                // Create an Intent to go back to the main activity
+                Intent intent = new Intent(ScheduleActivity.this, MainActivity.class);
+                intent.putExtra("source","schedule");
+                // If you want to pass data back to the main activity, you can use extras
+                // intent.putExtra("key", "value");
+                // Start the main activity
+
+                //to avoid hitting the onCreate method in MainActivity
+                // android:launchMode="singleTask"  is in the manifest
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                // Finish the current activity (optional)
+                finish();
+            }
+        });
     }
 
     private void setSpinners() {
-
+        ArrayList<ScheduleEntry> schedules = _dbService.getSixEntries();
+        Log.i(TAG, "setSpinners: " + schedules.size());
         // Assuming you're in an Activity or Fragment
         Spinner spinner1 = findViewById(R.id.spinner1);
         Spinner spinner2 = findViewById(R.id.spinner2);
         Spinner spinner3 = findViewById(R.id.spinner3);
         Spinner spinner4 = findViewById(R.id.spinner4);
         Spinner spinner5 = findViewById(R.id.spinner5);
+        Spinner spinner6 = findViewById(R.id.spinner6);
 // Add more spinners as needed
 
 // Retrieve the array of options from resources
@@ -65,13 +110,23 @@ public class ScheduleActivity extends AppCompatActivity implements MyInterface {
         spinner3.setAdapter(adapter);
         spinner4.setAdapter(adapter);
         spinner5.setAdapter(adapter);
+        spinner6.setAdapter(adapter);
+
+        LinearLayout rootLayout = findViewById(R.id.rootLayout);
+
+        schedules.forEach((s) -> {
+            Spinner spinner = rootLayout.findViewWithTag("spinner" + s.getScheduleRow());
+            int spinnerPosition = adapter.getPosition(s.getMode());
+            spinner.setSelection(spinnerPosition);
+
+            TextView textView = rootLayout.findViewWithTag("textView" + s.getScheduleRow());
+            textView.setText(s.getEventTime());
+        });
 
     }
 
     //ctrl + alt + L to format doc
-    private int _selectedTextViewId = 0;
-    private int _selectedSpinnerId = 0;
-    private int _selectedItemId = 0;
+
 
     public void onClick(View view) {
 
@@ -86,13 +141,12 @@ public class ScheduleActivity extends AppCompatActivity implements MyInterface {
             v = layoutParent.getChildAt(i);
             if (v instanceof LinearLayout) {
                 if (v.getId() == layout.getId()) {
-                    _selectedItemId = index;
+                    _selectedRowId = index;
                     break;
                 }
                 index++;
             }
         }
-
 
         int count = layout.getChildCount();
         v = null;
@@ -106,29 +160,32 @@ public class ScheduleActivity extends AppCompatActivity implements MyInterface {
             }
             if (v instanceof TextView) {
                 _selectedTextViewId = v.getId();
-
+                Log.i(TAG, "textView: " + v.getId());
+                break;
             }
         }
 
-        //send the id of the textView through to the timepicker fragment
-//        Button button = (Button) view;
-//        Bundle args = new Bundle();
-//        args.putInt("row", textViewId);
+        //send the time from the textView through to the timepicker fragment
+        TextView textView = (TextView) findViewById(_selectedTextViewId);
+        Bundle args = new Bundle();
+        String currentTime = textView.getText().toString();
+
+        args.putInt("currentHour", Integer.valueOf(currentTime.substring(0, 2)));
+        args.putInt("currentMinute", Integer.valueOf(currentTime.substring(3)));
 
         TimePickerFragment timePickerFragment = new TimePickerFragment();
-//        timePickerFragment.setArguments(args);
+        timePickerFragment.setArguments(args);
         timePickerFragment.show(this.getSupportFragmentManager(), "time picker");
 
         Log.i(TAG, "onClick: " + timePickerFragment.getId());
     }
 
-    public void onTimeSet(int row, int hourOfDay, int minute) {
+    public void onTimeSet(int hourOfDay, int minute) {
         // Handle the time set event here
         String selectedTime = String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute);
         Log.i(TAG, "onTimeSet: " + selectedTime);
 
         TextView textView = (TextView) findViewById(_selectedTextViewId);
-        Log.i(TAG, "textView: " + textView.getText());
         textView.setText(selectedTime);
 
         Spinner spinner = (Spinner) findViewById(_selectedSpinnerId);
@@ -137,8 +194,11 @@ public class ScheduleActivity extends AppCompatActivity implements MyInterface {
         // Use the selected time as needed
         //String message = "Selected Time: " + selectedTime;
         //Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        //_dbService.insert(String.valueOf(_selectedRowId), modeText, selectedTime);
 
-        _dbService.insert(String.valueOf(_selectedItemId), modeText, selectedTime);
+        //this will allow to create individual DB entries per ROW
+        _dbService.updateOrInsert(String.valueOf(_selectedRowId), modeText, selectedTime);
 
+        //ScheduleEntry entry = _dbService.getEntryByRowId(String.valueOf(_selectedRowId));
     }
 }
