@@ -32,16 +32,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.e("JSON_OBJECT", object.toString());
 
 
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            public void run() {
-                try {
-                    MainActivity.showNotification(getApplicationContext(), object.getString("bodyText"));
-                } catch (JSONException e) {
-                    //MainActivity.showNotification(getApplicationContext(),"Unknown message");
-                    Log.e("Exception", "Unknown message");
-                }
-            }
-        });
+//        new Handler(Looper.getMainLooper()).post(new Runnable() {
+//            public void run() {
+//                try {
+//                    MainActivity.showNotification(getApplicationContext(), object.getString("bodyText"));
+//                } catch (JSONException e) {
+//                    //MainActivity.showNotification(getApplicationContext(),"Unknown message");
+//                    Log.e("Exception", "Unknown message");
+//                }
+//            }
+//        });
 
 
         Log.i("new message", remoteMessage.getData().toString());

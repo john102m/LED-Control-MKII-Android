@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
                             TextView textView = findViewById(R.id.placeholder);
                             textView.setText(message);
                             if (message.contains("[Event]")) {
-                                showNotification(getApplicationContext(), message);
+                                //showNotification(getApplicationContext(), message);
                             }
 
                         } catch (Exception e) {
