@@ -58,7 +58,7 @@ public class TimePickerFragment extends DialogFragment
             _myInterface = (MyInterface) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnHeadlineSelectedListener");
+                    + " must implement OnTimeSet");
         }
     }
 

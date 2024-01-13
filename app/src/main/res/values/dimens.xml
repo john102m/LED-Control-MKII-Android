@@ -2,5 +2,6 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="tv_weight">0.6</dimen>
     <dimen name="sp_weight">1</dimen>
+    <dimen name="btn_elevation">14dp</dimen>
 
 </resources>

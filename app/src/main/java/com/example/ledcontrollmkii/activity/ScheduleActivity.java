@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.ledcontrollmkii.MyInterface;
 import com.example.ledcontrollmkii.R;
@@ -29,12 +30,13 @@ public class ScheduleActivity extends AppCompatActivity implements MyInterface {
     private int _selectedTextViewId = 0;
     private int _selectedSpinnerId = 0;
     private int _selectedRowId = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_schedule);
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        toolbar.setLogo (R.mipmap.ic_launcher_main);
 
         _dbService = new DatabaseService(_scheduleDbHelper);
 
@@ -126,8 +128,6 @@ public class ScheduleActivity extends AppCompatActivity implements MyInterface {
     }
 
     //ctrl + alt + L to format doc
-
-
     public void onClick(View view) {
 
         LinearLayout layout = (LinearLayout) view.getParent();

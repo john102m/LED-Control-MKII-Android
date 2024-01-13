@@ -21,12 +21,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -121,11 +123,18 @@ public class MainActivity extends AppCompatActivity {
 
         _dbService = new DatabaseService(_scheduleDbHelper);
 
-        textView = (TextView) findViewById(R.id.placeholder);
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        //setSupportActionBar(toolbar);
+        toolbar.setLogo (R.mipmap.ic_launcher_main);
+
+        //toolbar.getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //toolbar.getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_launcher_main);
+
+       // textView = (TextView) findViewById(R.id.placeholder);
         //String token = MyFirebaseMessagingService.getToken(this);
         //Log.e("newToken", token);
 
-        textView.setText("LED Controller");
+        //textView.setText("LED Controller");
         createWebSocketClient();
 
 //        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.rootLayout), (v, insets) -> {
@@ -251,19 +260,16 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("WebSocket", "Message received");
                 final String message = s;
                 // showNotification(getApplicationContext() , message);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            TextView textView = findViewById(R.id.placeholder);
-                            textView.setText(message);
-                            if (message.contains("[Event]")) {
-                                //showNotification(getApplicationContext(), message);
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                runOnUiThread(() -> {
+                    try {
+                        TextView textView = findViewById(R.id.placeholder);
+                        textView.setText(message);
+                        if (message.contains("[Event]")) {
+                            //showNotification(getApplicationContext(), message);
                         }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 });
             }
@@ -282,10 +288,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onException(Exception e) {
-                System.out.println(e.getMessage());
-                TextView textView = findViewById(R.id.placeholder);
-                textView.setText("Connection Error");
+                runOnUiThread(() -> {
+                    try {
+                        TextView textView = findViewById(R.id.placeholder);
+                        textView.setText("Failed to connect.");
+
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
                 websocketConnected = false;
+                Log.e("WebSocket", "Connection Error: " + e.getMessage().toString());
                 //textView.setText(e.getMessage().toString());
             }
 

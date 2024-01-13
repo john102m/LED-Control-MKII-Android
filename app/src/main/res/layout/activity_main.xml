@@ -5,23 +5,49 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop= "2dp"
     tools:context=".activity.MainActivity">
 
-    <TextView
-        android:id="@+id/placeholder"
-        android:layout_width="383dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:textAlignment="center"
-        android:text="@string/information"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_marginBottom = "6dp">
 
-    </TextView>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="1dp"
+            android:background="?attr/colorPrimary"
+            android:elevation="14dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <TextView
+            android:id="@+id/placeholder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="6dp"
+            android:textAlignment="center"
+            android:backgroundTint="@color/white"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:text="@string/information"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </TextView>
+
+        </androidx.appcompat.widget.Toolbar>
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/button6"
@@ -187,7 +213,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="98dp"
         android:layout_marginEnd="162dp"
 
         android:backgroundTint="#1B0505"
@@ -204,7 +230,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="120dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="98dp"
         android:layout_marginEnd="12dp"
 
         android:backgroundTint="#1B0505"
